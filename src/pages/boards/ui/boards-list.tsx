@@ -11,6 +11,7 @@ const boardUrl = (boardId: string) =>
 
 export function BoardsList({ className }: { className?: string }) {
   const { boards } = useBoards();
+
   const users = useUsers((s) => s.usersMap());
 
   const canViewBoard = useCanViewBoardFn();

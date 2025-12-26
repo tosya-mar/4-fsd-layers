@@ -1,11 +1,18 @@
 import clsx from "clsx";
-import { InputHTMLAttributes, PropsWithRef, useId } from "react";
+import {
+  InputHTMLAttributes,
+  PropsWithRef,
+  TextareaHTMLAttributes,
+  useId,
+} from "react";
 
 export type UiTextFieldProps = {
   className?: string;
   label?: string;
   error?: string;
   inputProps?: PropsWithRef<InputHTMLAttributes<HTMLInputElement>>;
+  textAreaProps?: PropsWithRef<TextareaHTMLAttributes<HTMLInputElement>>;
+  multiLine?: boolean;
 };
 
 export function UiTextField({
@@ -13,6 +20,8 @@ export function UiTextField({
   error,
   label,
   inputProps,
+  textAreaProps,
+  multiLine,
 }: UiTextFieldProps) {
   const id = useId();
   return (
@@ -22,14 +31,25 @@ export function UiTextField({
           {label}
         </label>
       )}
-      <input
-        {...inputProps}
-        id={id}
-        className={clsx(
-          inputProps?.className,
-          "rounded border border-slate-300 focus:border-teal-600 px-2 h-10 outline-none",
-        )}
-      />
+      {multiLine ? (
+        <textarea
+          {...textAreaProps}
+          id={id}
+          className={clsx(
+            textAreaProps?.className,
+            "rounded border border-slate-300 focus:border-teal-600 px-2 h-10 outline-none",
+          )}
+        />
+      ) : (
+        <input
+          {...inputProps}
+          id={id}
+          className={clsx(
+            inputProps?.className,
+            "rounded border border-slate-300 focus:border-teal-600 px-2 h-10 outline-none",
+          )}
+        />
+      )}
       {error && <div className="text-rose-400 text-sm">{error}</div>}
     </div>
   );
