@@ -25,7 +25,6 @@ export function UserSelect({
   const onChangeUser = (user?: User) => {
     onChangeUserId(user?.id);
   };
-  console.log(options);
 
   return (
     <UiSelect
